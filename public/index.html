@@ -1,0 +1,25 @@
+<html>
+    <body touchmove="showCoords(event)" style="background: #73d073">
+    </body>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="/socket.js"></script>
+
+    <script>
+        $(document).ready(function(){
+          var socket = io();
+          $('body')[0].addEventListener("touchmove",  function showCoords(event) {
+            var x = event.touches[0].clientX;
+            var y = event.touches[0].clientY;
+            var coords = "X coords: " + x + ", Y coords: " + y;
+            document.getElementById("coordinates").innerHTML = event.touches[0].clientX;
+            socket.emit('movemouse', x+'&'+y);
+      }, false);
+       $('body')[0].addEventListener("click",  function(event) {
+        socket.emit('click', "s");
+       })
+    })
+    </script>
+</html>

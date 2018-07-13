@@ -1,0 +1,25 @@
+{
+  "name": "ad-skipper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Viping7/AdSkipper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Viping7/AdSkipper/issues"
+  },
+  "homepage": "https://github.com/Viping7/AdSkipper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.15.2",
+    "jimp": "^0.2.28",
+    "socket.io": "^2.1.1"
+  }
+}
