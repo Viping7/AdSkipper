@@ -1,29 +1,63 @@
 <html>
+    <head>
+    </head>
     <body touchmove="showCoords(event)" style="background: #73d073" >
-        <p id='coordinates' style="visibility:hidden;"></p>
+       
     </body>
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="/socket.js"></script>
-
-    <script>
+  <script>
         $(document).ready(function(){
             let valueX = $('body').width();
-            let valueY = $('body').width();
-          var socket = io();
-          $('body')[0].addEventListener("touchmove",  function showCoords(event) {
+            let valueY = $('body').height();
+            var socket = io();
+            var el = $('body')[0];
+            var endCoords, startCoords, coords;
+            el.addEventListener("touchmove",  function showCoords(event) {
+               
+             coords = getCoords(event,startCoords);
+                
+            socket.emit('movemouse', coords.x+'&'+coords.y+'&'+valueX +'&' + valueY);
+        }, false);
+        
+        el.addEventListener('touchend', function(e){
+              endCoords = coords;
+        })
+
+        el.addEventListener('touchstart', function(e){
+            if(endCoords)
+            startCoords = getCoords(e);
+        })
+
+        el.addEventListener("wheel",  function showCoords(event) {
+            var x = event.deltaX;
+            var y = event.deltaY;
+            socket.emit('scroll', x+'&'+y+'&'+valueX +'&' + valueY);
+        }, false);
+
+        el.addEventListener("click",  function(event) {
+            socket.emit('click', "s");
+        })
+
+        function getCoords(event,startCoords){
+            var distance={};
+            var direction = 0;
             var x = event.touches[0].clientX;
             var y = event.touches[0].clientY;
-            var coords = "X coords: " + x + ", Y coords: " + y;
-            document.getElementById("coordinates").innerHTML = event.touches[0].clientX;
-            socket.emit('movemouse', x+'&'+y+'&'+valueX +'&' + valueY);
-        }, false);
-       $('body')[0].addEventListener("click",  function(event) {
-        socket.emit('click', "s");
-        $('#photo').attr('src',"http://localhost:3000/myfile.png");
-       })
+            if(startCoords){
+            // Calculates distance from starting coordinates
+                    distance.x = startCoords.x - x
+                    distance.y = startCoords.y - y
+            // Calculates the coordinates where mouse has to be moved  
+                    x = endCoords.x - distance.x;
+                    y = endCoords.y - distance.y
+            }
+            return {x:x,y:y};
+        }
+
     })
-    </script>
+  </script>
 </html>

@@ -8,7 +8,7 @@ var io = require('socket.io')(http);
 var size =robot.getScreenSize();
 let fs = require('fs')
 let Jimp = require('jimp')
-
+var coords;
 let size1 = 1366;
 let rimg = robot.screen.capture();
 let fpath = 'public/myfile.png'
@@ -20,14 +20,17 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    socket.on('movemouse', function(msg){
-        let valueX = size.width/msg.split('&')[2]
-        let valueY = size.height/ msg.split('&')[3]
-        var xa = valueX * msg.split('&')[0];
-        var yb = valueY * msg.split('&')[1];
-        robot.moveMouse(xa, yb);
+      socket.on('movemouse', function(msg){
+        coords = formatCoordinates(msg);
+        robot.moveMouse(coords.x, coords.y);
+     
       });
-     socket.on('click',function(msg){
+      
+      socket.on('scroll', function(msg){
+        let scoords = formatCoordinates(msg);
+        robot.scrollMouse(scoords.x, scoords.y);
+      });
+      socket.on('click',function(msg){
         // let jimg = new Jimp(size.width, size.height);
         // for (var x=0; x<size.width; x++) {
         //     for (var y=0; y<size.height; y++) {
@@ -45,7 +48,13 @@ io.on('connection', function(socket){
 
   });
 
-
+function formatCoordinates(msg){
+        let valueX = size.width/msg.split('&')[2]
+        let valueY = size.height/ msg.split('&')[3]
+        var xa = valueX * msg.split('&')[0];
+        var yb = valueY * msg.split('&')[1];
+        return {x:xa, y:yb};
+}
 
   
 http.listen(3000, function(){
