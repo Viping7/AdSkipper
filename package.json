@@ -4,7 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Shopping App\"",    
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
@@ -18,8 +22,11 @@
   "homepage": "https://github.com/Viping7/AdSkipper#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "electron": "^2.0.5",
     "express": "^4.15.2",
+    "ip": "^1.1.5",
     "jimp": "^0.2.28",
+    "robotjs": "^0.5.1",
     "socket.io": "^2.1.1"
   }
 }
