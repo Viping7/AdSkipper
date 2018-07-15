@@ -8,7 +8,7 @@ const size =robot.getScreenSize();
 var coords;
 const electron = require("electron");
 var ip = require('ip');
-
+robot.setMouseDelay(0)
 const {app,BrowserWindow, Menu, ipcMain} = electron;
 let mainWindow, newWindow;
 

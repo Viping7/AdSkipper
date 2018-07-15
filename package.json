@@ -8,7 +8,9 @@
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . virtual-mouse --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/icons/win/icon.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Virtual Mouse\"",
-    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds"
+    "package-linux": "electron-packager . virtual-mouse --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds",
+    "rebuild": "npm rebuild --runtime=electron --target=2.0.5 --disturl=https://atom.io/download/atom-shell --abi=48"
+
   },
   "repository": {
     "type": "git",
