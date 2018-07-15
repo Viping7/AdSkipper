@@ -49,8 +49,8 @@ io.on('connection', function(socket){
 function formatCoordinates(msg){
         let valueX = size.width/msg.split('&')[2]
         let valueY = size.height/ msg.split('&')[3]
-        var xa = valueX * msg.split('&')[0];
-        var yb = valueY * msg.split('&')[1];
+        var xa = valueX * msg.split('&')[0] * 2;
+        var yb = valueY * msg.split('&')[1] * 2;
         return {x:xa, y:yb};
 }
 

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Virtual Mouse
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="mouse-zone" (touchstart)="touchStarted($event)" (touchend)="touchEnded($event)" (touchmove)="touchmoved($event)" (tap)='mouseClicked($event)'>
+
+</ion-content>

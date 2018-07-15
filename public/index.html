@@ -11,12 +11,12 @@
   <script src="/socket.js"></script>
   <script>
         $(document).ready(function(){
-            let valueX = $('body').width();
-            let valueY = $('body').height();
+            let valueX = $(window).width();
+            let valueY = $(window).height();
             var socket = io();
             var el = $('body')[0];
             var endCoords, startCoords, coords;
-            el.addEventListener("touchmove",  function showCoords(event) {
+        el.addEventListener("touchmove",  function showCoords(event) {
                
              coords = getCoords(event,startCoords);
                 
@@ -31,6 +31,14 @@
             if(endCoords)
             startCoords = getCoords(e);
         })
+
+        if(valueX >= 991){
+            el.addEventListener("mousemove",  function showCoords(event) {    
+               let x = event.clientX;
+               let y= event.clientY;           
+               socket.emit('movemouse',x+'&'+y+'&'+valueX +'&' + valueY);
+           }, false); 
+        }   
 
         el.addEventListener("wheel",  function showCoords(event) {
             var x = event.deltaX;
