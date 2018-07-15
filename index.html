@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link href="assets/style.css" rel='stylesheet'>
+    <title>Virtual Mouse</title>
 </head>
+
 <body>
-    <h1 id='ip'>gjjg </h1>
+    <div class="container">
+        <div class="outer">
+            <div class="inner">
+                <h2>Open your browser and connect to</h2>
+                <h1 id='ip'> </h1>
+            </div>
+        </div>
+
+    </div>
 </body>
 <script>
     const electron = require('electron');
-    const {ipcRenderer} = electron;
-    ipcRenderer.send('ip',function(e,i){
+    const { ipcRenderer } = electron;
+    ipcRenderer.send('ip', function (e, i) {
 
     })
-    ipcRenderer.on('ip',function(e,ip){
-        document.getElementById('ip').innerHTML = ip;
+    ipcRenderer.on('ip', function (e, ip) {
+        document.getElementById('ip').innerHTML = "http://"+ ip + ":3000";
     })
 </script>
+
 </html>

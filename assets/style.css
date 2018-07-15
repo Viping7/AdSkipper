@@ -1,0 +1,22 @@
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #73d073;
+}
+.container{
+    text-align: center;
+    height: 92vh;
+
+}
+h1,h2{
+    color: #fff;
+    font-weight: 400;
+}
+.outer{
+    display: table;
+    margin: 0 auto;
+}
+.inner{
+    display: table-cell;
+    vertical-align: middle;
+    height: 93vh;
+}
